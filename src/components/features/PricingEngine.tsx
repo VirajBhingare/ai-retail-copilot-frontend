@@ -128,14 +128,14 @@ export const PricingEngine = () => {
                   const diff = product.basePrice - compPrice;
                   statusUI = (
                     <span className="inline-flex items-center gap-1.5 text-red-600 dark:text-red-400 font-medium">
-                      <TrendingDown size={16} /> Higher by ${diff.toFixed(2)}
+                      <TrendingUp size={16} /> Higher by {diff.toFixed(2)}
                     </span>
                   );
                 } else {
                   const diff = compPrice - product.basePrice;
                   statusUI = (
                     <span className="inline-flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-medium">
-                      <TrendingUp size={16} /> Cheaper by ${diff.toFixed(2)}
+                      <TrendingDown size={16} /> Cheaper by ${diff.toFixed(2)}
                     </span>
                   );
                 }
@@ -152,13 +152,13 @@ export const PricingEngine = () => {
                       </span>
                     </td>
                     <td className="px-6 py-4 font-semibold text-gray-900 dark:text-[#E2DFE7]">
-                      ${product.basePrice?.toFixed(2)}
+                      ₹{product.basePrice?.toFixed(2)}
                     </td>
                     <td className="px-6 py-4 text-gray-500 dark:text-gray-400">
                       {compName}
                     </td>
                     <td className="px-6 py-4">
-                      ${compPrice?.toFixed(2) || "N/A"}
+                      ₹{compPrice?.toFixed(2) || "N/A"}
                     </td>
                     <td className="px-6 py-4">{statusUI}</td>
                   </tr>

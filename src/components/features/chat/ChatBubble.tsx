@@ -35,11 +35,48 @@ export const ChatBubble: React.FC<ChatBubbleProps> = ({ message }) => {
           className={`p-4 rounded-2xl shadow-sm ${
             isUser
               ? "bg-[#8264C2] dark:bg-[#967BB6] text-white rounded-tr-sm"
-              : "bg-white dark:bg-[#2A2533] border border-[#E5E0F1] dark:border-[#3B3446] text-gray-800 dark:text-[#E2DFE7] rounded-tl-sm"
+              : "bg-white dark:bg-[#2A2533] border border-[#E5E0F1] dark:border-[#3B3446] text-gray-800 dark:text-[#E2DFE7] rounded-tl-sm w-full"
           }`}
         >
-          <div className="markdown-body leading-relaxed text-[15px]">
-            <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
+          <div className="markdown-body leading-relaxed text-[15px] w-full overflow-hidden">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm, remarkBreaks]}
+              components={{
+                // Intercept table elements and apply Tailwind classes
+                table: ({ node, ...props }) => (
+                  <div className="my-4 w-full overflow-x-auto rounded-xl border border-[#E5E0F1] dark:border-[#3B3446] shadow-sm">
+                    <table
+                      className="w-full text-left border-collapse"
+                      {...props}
+                    />
+                  </div>
+                ),
+                thead: ({ node, ...props }) => (
+                  <thead
+                    className="bg-[#F8F7FA] dark:bg-[#15131A] text-gray-600 dark:text-gray-300"
+                    {...props}
+                  />
+                ),
+                th: ({ node, ...props }) => (
+                  <th
+                    className="px-4 py-3 text-xs font-semibold uppercase tracking-wider border-b border-[#E5E0F1] dark:border-[#3B3446]"
+                    {...props}
+                  />
+                ),
+                td: ({ node, ...props }) => (
+                  <td
+                    className="px-4 py-3 text-sm border-b border-[#E5E0F1] dark:border-[#3B3446] last:border-0"
+                    {...props}
+                  />
+                ),
+                tr: ({ node, ...props }) => (
+                  <tr
+                    className="hover:bg-[#F8F7FA]/50 dark:hover:bg-[#3B3446]/30 transition-colors"
+                    {...props}
+                  />
+                ),
+              }}
+            >
               {message.content}
             </ReactMarkdown>
           </div>

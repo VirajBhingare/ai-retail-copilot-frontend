@@ -70,7 +70,7 @@ export const InventoryHub = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4">
-                    ${product.basePrice?.toFixed(2)}
+                    ₹{product.basePrice?.toFixed(2)}
                   </td>
                   <td className="px-6 py-4">
                     {product.inventory?.stockLevel} units
