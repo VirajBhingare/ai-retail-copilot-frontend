@@ -19,7 +19,7 @@ export const Sidebar: React.FC = () => {
     <aside className="hidden w-64 flex-col border-r border-[#E5E0F1] bg-[#ECE9F2] transition-colors duration-300 dark:border-[#2A2533] dark:bg-[#15131A] md:flex">
       <div className="p-5 font-bold text-xl flex items-center gap-2 text-[#4A3D63] dark:text-[#BCA3E0]">
         <DatabaseZap className="text-[#8264C2] dark:text-[#967BB6]" />
-        Retail OS
+        Retail Copilot
       </div>
       <nav className="flex-1 p-4 space-y-2">
         {/* We use the children render prop ({ isActive }) to conditionally color the icons */}

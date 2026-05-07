@@ -17,7 +17,7 @@ export const Header: React.FC<HeaderProps> = ({
     <header className="bg-white/80 dark:bg-[#1E1B24]/80 backdrop-blur-md border-b border-[#E5E0F1] dark:border-[#2A2533] p-4 flex justify-between items-center shadow-sm z-10 shrink-0 transition-colors duration-300">
       <div>
         <h1 className="text-xl font-bold text-[#4A3D63] dark:text-[#BCA3E0]">
-          Autonomous Replenishment Copilot
+          Autonomous Replenishment Assistant
         </h1>
         <p className="text-sm text-gray-500 dark:text-gray-400">
           Powered by Claude & Postgres
