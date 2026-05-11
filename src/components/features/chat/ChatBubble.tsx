@@ -14,39 +14,43 @@ export const ChatBubble: React.FC<ChatBubbleProps> = ({ message }) => {
 
   return (
     <div
-      className={`flex gap-4 max-w-4xl mx-auto ${isUser ? "flex-row-reverse" : "flex-row"}`}
+      className={`flex gap-3 md:gap-4 max-w-4xl mx-auto w-full ${isUser ? "flex-row-reverse" : "flex-row"}`}
     >
-      {/* Avatar */}
+      {/* Avatar - scaled down slightly on mobile */}
       <div
-        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full shadow-sm ${
+        className={`flex h-8 w-8 md:h-10 md:w-10 shrink-0 items-center justify-center rounded-full shadow-sm ${
           isUser
             ? "bg-[#8264C2] dark:bg-[#967BB6] text-white"
             : "bg-white dark:bg-[#2A2533] border border-[#E5E0F1] dark:border-[#3B3446] text-[#8264C2] dark:text-[#BCA3E0]"
         }`}
       >
-        {isUser ? <User size={20} /> : <Bot size={22} />}
+        {isUser ? (
+          <User className="w-4 h-4 md:w-5 md:h-5" />
+        ) : (
+          <Bot className="w-[18px] h-[18px] md:w-[22px] md:h-[22px]" />
+        )}
       </div>
 
-      {/* Message Content */}
+      {/* Message Content - wider on mobile (90%) vs desktop (85%) */}
       <div
-        className={`flex flex-col ${isUser ? "items-end" : "items-start"} max-w-[85%]`}
+        className={`flex flex-col ${isUser ? "items-end" : "items-start"} max-w-[90%] md:max-w-[85%] min-w-0`}
       >
         <div
-          className={`p-4 rounded-2xl shadow-sm ${
+          className={`p-3.5 md:p-4 rounded-2xl shadow-sm overflow-hidden w-full ${
             isUser
               ? "bg-[#8264C2] dark:bg-[#967BB6] text-white rounded-tr-sm"
-              : "bg-white dark:bg-[#2A2533] border border-[#E5E0F1] dark:border-[#3B3446] text-gray-800 dark:text-[#E2DFE7] rounded-tl-sm w-full"
+              : "bg-white dark:bg-[#2A2533] border border-[#E5E0F1] dark:border-[#3B3446] text-gray-800 dark:text-[#E2DFE7] rounded-tl-sm"
           }`}
         >
-          <div className="markdown-body leading-relaxed text-[15px] w-full overflow-hidden">
+          <div className="markdown-body leading-relaxed text-[15px] w-full wrap-break-word overflow-x-auto">
             <ReactMarkdown
               remarkPlugins={[remarkGfm, remarkBreaks]}
               components={{
-                // Intercept table elements and apply Tailwind classes
+                // Prevent tables inside Markdown from breaking the layout on mobile
                 table: ({ node, ...props }) => (
-                  <div className="my-4 w-full overflow-x-auto rounded-xl border border-[#E5E0F1] dark:border-[#3B3446] shadow-sm">
+                  <div className="my-3 md:my-4 w-full overflow-x-auto rounded-xl border border-[#E5E0F1] dark:border-[#3B3446] shadow-sm block">
                     <table
-                      className="w-full text-left border-collapse"
+                      className="w-full text-left border-collapse min-w-[400px]"
                       {...props}
                     />
                   </div>
@@ -59,13 +63,13 @@ export const ChatBubble: React.FC<ChatBubbleProps> = ({ message }) => {
                 ),
                 th: ({ node, ...props }) => (
                   <th
-                    className="px-4 py-3 text-xs font-semibold uppercase tracking-wider border-b border-[#E5E0F1] dark:border-[#3B3446]"
+                    className="px-3 md:px-4 py-2 md:py-3 text-xs font-semibold uppercase tracking-wider border-b border-[#E5E0F1] dark:border-[#3B3446]"
                     {...props}
                   />
                 ),
                 td: ({ node, ...props }) => (
                   <td
-                    className="px-4 py-3 text-sm border-b border-[#E5E0F1] dark:border-[#3B3446] last:border-0"
+                    className="px-3 md:px-4 py-2 md:py-3 text-sm border-b border-[#E5E0F1] dark:border-[#3B3446] last:border-0"
                     {...props}
                   />
                 ),
@@ -84,8 +88,8 @@ export const ChatBubble: React.FC<ChatBubbleProps> = ({ message }) => {
 
         {/* Database Usage Indicator */}
         {message.tool_used && (
-          <div className="flex items-center gap-1.5 mt-2 text-xs font-semibold text-[#8264C2] dark:text-[#BCA3E0] bg-[#EADAFF]/50 dark:bg-[#2A2533] px-2.5 py-1.5 rounded-lg border border-[#D5C6EB] dark:border-[#3B3446]">
-            <DatabaseZap size={14} />
+          <div className="flex items-center gap-1.5 mt-2 text-[11px] md:text-xs font-semibold text-[#8264C2] dark:text-[#BCA3E0] bg-[#EADAFF]/50 dark:bg-[#2A2533] px-2.5 py-1.5 rounded-lg border border-[#D5C6EB] dark:border-[#3B3446]">
+            <DatabaseZap size={12} className="md:w-3.5 md:h-3.5" />
             <span>Queried Postgres Database</span>
           </div>
         )}

@@ -22,7 +22,7 @@ export const useAgentStatus = () => {
     };
 
     checkStatus();
-    const interval = setInterval(checkStatus, 15000);
+    const interval = setInterval(checkStatus, 900000);
     return () => clearInterval(interval);
   }, []);
 
